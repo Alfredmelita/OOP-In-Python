@@ -1,0 +1,77 @@
+# Activity 1: Smartphone Class
+
+# Base class (Parent)
+class Device:
+    def __init__(self, brand, model):
+        self.brand = brand
+        self.model = model
+
+    def show_info(self):
+        print(f" Device: {self.brand} {self.model}")
+
+
+# Child class (Smartphone inherits from Device)
+class Smartphone(Device):
+    def __init__(self, brand, model, battery):
+        # Call parent constructor
+        super().__init__(brand, model)
+        self.battery = battery  # in percentage
+
+    def make_call(self, number):
+        if self.battery > 5:
+            print(f" Calling {number}...")
+            self.battery -= 5
+        else:
+            print(" Battery too low to make a call.")
+
+    def charge(self):
+        self.battery = 100
+        print(" Phone fully charged!")
+
+    # Overriding parent method (Polymorphism in action)
+    def show_info(self):
+        print(f" Smartphone: {self.brand} {self.model} | Battery: {self.battery}%")
+
+
+# Activity 2: Polymorphism Challenge
+
+# Base class
+class Vehicle:
+    def move(self):
+        print("Moving...")
+
+# Child classes with their own move() implementations
+class Car(Vehicle):
+    def move(self):
+        print("Driving on the road...")
+
+class Plane(Vehicle):
+    def move(self):
+        print(" Flying in the sky...")
+
+class Boat(Vehicle):
+    def move(self):
+        print("Sailing on water...")
+
+
+# -------------------------------
+# Main Program
+# -------------------------------
+if __name__ == "__main__":
+    print("Activity 1: Smartphone Demo\n")
+
+    phone1 = Smartphone("Samsung", "Galaxy S24", 50)
+    phone1.show_info()
+    phone1.make_call("0712345678")
+    phone1.show_info()
+    phone1.charge()
+    phone1.show_info()
+
+    print("\n Activity 2: Polymorphism with Vehicles\n")
+
+    # List of different vehicles
+    vehicles = [Car(), Plane(), Boat()]
+
+    # Each object responds to move() in its own way
+    for v in vehicles:
+        v.move()
